@@ -35,12 +35,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="list-unstyled">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-none d-lg-flex">
         <li class="nav-item">
           <a class="nav-link active me-auto text-start" href="#hero">Bryan's Portfolio</a>
         </li>
-      </ul>
-      <ul class="navbar-nav ms-auto mb-2 mg-lb-0 order-lg-last">
         <li class="nav-item">
           <a class="nav-link" href="#about-me">About Me</a>
         </li>
@@ -57,14 +55,30 @@
           <a class="nav-link" href="mailto:contact@myportfolio.com">Get in Touch</a>
         </li>
       </ul>
-      <div class="container pfp">
-        <div class="profile-pic d-flex align-items-center ms-3 order-first order-lg-last">
-          <div class="rounded-circle overflow-hidden">
-            <img src="profile-img.png" alt="Profile Picture" class="img-fluid">
-          </div>
+      <div class="navbar-text ms-3 text-center"></div>
+      <div class="profile-pic d-flex align-items-center ms-3">
+        <div class="rounded-circle overflow-hidden">
+          <img src="profile-img.png" alt="Profile Picture" class="img-fluid">
         </div>
       </div>
     </div>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex d-lg-none">
+      <li class="nav-item">
+        <a class="nav-link" href="#about-me">About Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#experiences">Experiences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#skills">Skills</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact-me">Contact Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="mailto:contact@myportfolio.com">Get in Touch</a>
+      </li>
+    </ul>
   </div>
 </nav>
   
@@ -72,7 +86,9 @@
     <section id="hero">
         <div class="intro-text">
           <h1>Welcome to my portfolio</h1>
-          <p class="mb-5">This static website is to showcase me and my work experiences. Mainly for employers viewing.</p>
+          <p class="mb-5">This static website is to showcase me and my work experiences. 
+            <br></br>
+            Mainly for employers viewing.</p>
           <a href="#about-me" class="btn btn-outline-light btn-lg btn-hero">Explore..</a>
         </div>
       </section>      
