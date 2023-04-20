@@ -306,7 +306,36 @@ html, body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
+    #scrollToTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 50%;
+      opacity: 0.7;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    #scrollToTopBtn:hover {
+      opacity: 1;
+    }
+
+
+
   @media (max-width: 768px) {
+      
+      .pfp {
+      order: 1;
+      }
+      
     #scroll-to-top {
       bottom: 70px;
       left: auto;
