@@ -143,12 +143,12 @@ html, body {
   /* Experiences section styles */
   #experiences {
     font-family: 'Inter', sans-serif;
+    background-color:#080808;
     padding-top: 6rem;
     padding-bottom: 6rem;
     position: sticky;
     top: 0;
   }
-  
   #experiences h2 {
     font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
