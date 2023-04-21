@@ -325,7 +325,7 @@ html, body {
   }
   
     #scrollToTopBtn {
-      display: none;
+    display: none;
     position: fixed;
     bottom: 20px;
     left: 20px;
@@ -334,12 +334,12 @@ html, body {
     font-size: 18px;
     line-height: 1.7;
     padding: 10px 15px;
-    background: #000;
+    /* background: #000; */
     color: #fff;
-    border: none;
-    border-radius: 50%;
+    border-radius: 25%;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(28, 28, 30, 0.25);
+    /* box-shadow: 0 0 10px rgba(28, 28, 30, 0.025); */
     transition: opacity 0.3s ease-in-out;
     }
 
@@ -367,5 +367,18 @@ html, body {
       left: auto;
       right: 20px;
     }
+  @media (min-width: 300px) {
+    .navbar { 
+      background-color: rgba(28, 28, 30, 0.3);
+      padding-bottom: 8px;
+      padding-top: 8px;
+    }
+    .profile-pic{
+      margin-bottom: 15px;
+    }
+    .rounded-circle{
+      text-align: center;
+    }
+  }
   }
   
