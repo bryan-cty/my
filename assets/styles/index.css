@@ -149,6 +149,9 @@ html, body {
     position: sticky;
     top: 0;
   }
+    section#experiences {
+        background-color: #080808;
+    }
   #experiences h2 {
     font-family: 'Inter', sans-serif;
     font-size: 2.5rem;
