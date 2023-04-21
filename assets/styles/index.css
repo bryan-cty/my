@@ -83,7 +83,7 @@ html, body {
   /* Hero section styles */
 /* Hero section styles */
 #hero {
-    background: url('../img/hero-bg.jpg') center center/cover no-repeat;
+    background: url('hero-bg.jpg') center center/cover no-repeat;
     color: #ffffff;
     height: 100vh;
     position: relative;
