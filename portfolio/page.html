@@ -47,22 +47,22 @@
         scrollToSection(currentSectionIndex - 1);
       }
     });
-    
+
     // select navigation links
-  var navLinks = document.querySelectorAll('.nav-link');
+    var navLinks = document.querySelectorAll('.nav-link');
 
-  // loop through navigation links and add event listener
-  for (var i = 0; i < navLinks.length; i++) {
-    navLinks[i].addEventListener('click', closeNavbar);
-  }
-
-  // function to close navbar
-  function closeNavbar() {
-    var navbar = document.querySelector('.navbar-collapse');
-    if (navbar.classList.contains('show')) {
-      navbar.classList.remove('show');
+    // loop through navigation links and add event listener
+    for (var i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', closeNavbar);
     }
-  }
+
+    // function to close navbar
+    function closeNavbar() {
+      var navbar = document.querySelector('.navbar-collapse');
+      if (navbar.classList.contains('show')) {
+        navbar.classList.remove('show');
+      }
+    }
 
 
   </script>
@@ -109,11 +109,9 @@
 
   <!-- Hero section -->
   <section id="hero">
-    <div class="intro-text">
-      <h1>Welcome to my portfolio</h1>
+    <div class="intro-text w-75">
+      <h1>Welcome to my portfolio.</h1>
       <p class="mb-5">This static website is to showcase me and my work experiences.
-        <br></br>
-        Mainly for employers viewing.
       </p>
       <a href="#about-me" class="btn btn-outline-light btn-lg btn-hero">Explore..⛏</a>
     </div>
@@ -124,12 +122,13 @@
     <div class="container">
       <h2>About me</h2>
       <p>
-        Greetings, I'm Bryan, an IT Engineer with 2 years of experience. 
-        I've been gaining experience in various IT Roles and I plan to explore as many roles as I possibly can. 
-        My passion is seeking how I can improve in what I do and always learn along the way which helps me strive to deliver high-quality work.
-        <br></br>
+        Greetings, I'm Bryan, an IT Engineer with 2 years of experience.
+        I've been gaining experience in various IT Roles and I plan to explore as many roles as I possibly can.</br>
+        My passion is seeking how I can improve in what I do and always learn along the way which helps me strive to
+        deliver high-quality work.
+        </br></br>
         When I'm not working, I enjoy hitting the gym, Knitting/Crocheting and casual runs.
-        <br></br>
+        </br></br>
         Let's find out how I can contribute to your organization!
       </p>
     </div>
@@ -139,22 +138,32 @@
   <section id="experiences">
     <div class="container">
       <h2>Experiences</h2>
-      <ul>
-        <li>Netpoleon Solutions
-          <ul>
-            <li>&lbrack;Jul 2022 &hyphen; Mar 2023&rbrack;</li>
-            <li>Associate Support Engineer</li>
-            <li>Brief Explanation goes here..</li>
-          </ul>
-        </li>
-        <li>Star Information Systems
-             <ul>
-              <li> &lbrack;Apr 2023 &hyphen; present&rbrack;</li>
-              <li>Junior Technical Consultant</li>
-              <li>Brief Explanation goes here..</li>
-          </ul>
-        </li>
-      </ul>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h3>Netpoleon Solutions</h3>
+            <ul>
+              <h5>Jul 2022 &hyphen; Mar 2023</h5>
+              <li>Associate Support Engineer
+                <ul>
+                  <li>Brief Explanation goes here..</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h3>Star Information Systems</h3>
+            <ul>
+              <h5>Apr 2023 &hyphen; Present</h5>
+              <li>Junior Technical Consultant
+                <ul>
+                  <li>Brief Explanation goes here..</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
