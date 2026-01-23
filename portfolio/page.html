@@ -237,7 +237,7 @@
           if (this.hash) {
             e.preventDefault();
             const target = document.querySelector(this.hash);
-            target.scrollIntoView({ behavior: "smooth" });
+            target.scrollIntoView({ behavior: "smooth", block: "start"});
           }
           const navbar = document.querySelector(".navbar-collapse");
           if (navbar.classList.contains("show")) {
@@ -264,5 +264,6 @@
 </body>
 
 </html>
+
 
 
