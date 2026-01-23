@@ -46,6 +46,11 @@ section {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+.navbar .nav-link.active {
+  color: #0d6efd !important;
+  font-weight: 600;
+}
+
 .navbar-brand {
   font-size: 1.25rem;
 }
@@ -386,5 +391,6 @@ section#experiences {
   }
 }
 }
+
 
 
