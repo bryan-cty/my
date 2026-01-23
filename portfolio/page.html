@@ -11,9 +11,9 @@
   <link rel="stylesheet" href="../assets/styles/index.css">
 </head>
 
-<body>
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="90" tabindex="0">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+  <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#hero">Bryan's Portfolio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -221,6 +221,11 @@
     document.addEventListener("DOMContentLoaded", function () {
       const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
+      var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: 90
+      });
+
       // Scroll button visibility
       window.addEventListener("scroll", () => {
         scrollToTopBtn.style.display = window.scrollY > 20 ? "block" : "none";
@@ -264,6 +269,7 @@
 </body>
 
 </html>
+
 
 
 
