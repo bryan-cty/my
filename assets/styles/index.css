@@ -7,6 +7,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: #1c1c1e;
   color: #e4e4e4;
+  padding-top: 90px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -32,7 +33,7 @@ a:hover {
   border-color: #0c64d8;
 }
 section {
-  scroll-margin-top: 70px;
+  scroll-margin-top: 90px;
 }
 /* Navbar styles */
 .navbar {
@@ -86,8 +87,6 @@ section {
   object-position: center;
 }
 
-
-/* Hero section styles */
 /* Hero section styles */
 #hero {
   background: url('../img/mesh-758.png') center center/cover no-repeat;
@@ -391,6 +390,7 @@ section#experiences {
   }
 }
 }
+
 
 
 
