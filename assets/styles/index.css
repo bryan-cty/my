@@ -91,7 +91,7 @@ section {
 #hero {
   background: url('../img/mesh-758.png') center center/cover no-repeat;
   color: #ffffff;
-  height: 100vh;
+  min-height: calc(100vh - 90px);
   position: relative;
 }
 
@@ -394,6 +394,7 @@ section#experiences {
   }
 }
 }
+
 
 
 
