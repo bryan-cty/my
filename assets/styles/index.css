@@ -2,6 +2,11 @@
 html, body {
   height: 100%;
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #1c1c1e;
+  color: #e4e4e4;
 }
 
 body {
@@ -30,16 +35,29 @@ section {
   position: relative; /* IMPORTANT: removes stacking issues */
 }
 
+section:not(#hero) {
+  scroll-margin-top: 90px; /* for fixed navbar offset */
+  padding: 6rem 0;
+  position: relative; /* stacking context */
+}
+
 /* ========== NAVBAR ========== */
-.navbar {
+/* .navbar {
   font-family: 'Inter', sans-serif;
   padding: 8px 0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background-color: rgba(28, 28, 30, 0.3);
   border: none;
+} */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  backdrop-filter: blur(10px);
+  background-color: rgba(28, 28, 30, 0.3);
 }
-
 .navbar-nav {
   align-items: center;
 }
@@ -71,19 +89,26 @@ section {
 
 /* ========== HERO ========== */
 #hero {
-  background: url('../img/mesh-758.png') center center/cover no-repeat;
+  background: url('../img/mesh-758.png') center center / cover no-repeat;
   color: #ffffff;
-  min-height: calc(100vh - 90px);
+  height: 100vh; /* full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  padding: 0; /* remove default section padding */
+  box-sizing: border-box;
 }
 
+/* Optional: adjust hero text container for responsiveness */
+#hero .container {
+  max-width: 800px;
+  padding: 0 1rem;
+}
 #hero a.btn {
   text-decoration: none;
 }
-
 .btn:focus,
 .btn:active {
   text-decoration: none !important;
@@ -159,4 +184,5 @@ section {
 #scrollToTopBtn:hover {
   opacity: 1;
 }
+
 
