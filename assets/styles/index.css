@@ -95,6 +95,10 @@ section {
   position: relative;
 }
 
+#hero a.btn {
+  text-decoration: none;
+}
+
 .btn-hero {
   background-color: rgba(255, 255, 255, 0.05);
   border: none;
@@ -390,6 +394,7 @@ section#experiences {
   }
 }
 }
+
 
 
 
