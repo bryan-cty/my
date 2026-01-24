@@ -29,11 +29,12 @@ a:hover {
   text-decoration: underline;
 }
 
-section {
+/*section {
   scroll-margin-top: 90px;
   padding: 6rem 0;
-  position: relative; /* IMPORTANT: removes stacking issues */
+  position: relative; /* IMPORTANT: removes stacking issues 
 }
+*/
 
 section:not(#hero) {
   scroll-margin-top: 90px; /* for fixed navbar offset */
@@ -89,7 +90,7 @@ section:not(#hero) {
 
 /* ========== HERO ========== */
 #hero {
-  background: url('../img/mesh-758.png') center center / cover no-repeat;
+  background: url('../img/mesh-270.png') center center / cover no-repeat;
   color: #ffffff;
   height: 100vh; /* full viewport height */
   display: flex;
@@ -184,5 +185,6 @@ section:not(#hero) {
 #scrollToTopBtn:hover {
   opacity: 1;
 }
+
 
 
