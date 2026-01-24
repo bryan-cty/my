@@ -84,6 +84,12 @@ section {
   text-decoration: none;
 }
 
+.btn:focus,
+.btn:active {
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
 .btn-hero {
   background-color: rgba(255, 255, 255, 0.05);
   border: none;
@@ -153,3 +159,4 @@ section {
 #scrollToTopBtn:hover {
   opacity: 1;
 }
+
