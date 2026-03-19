@@ -116,9 +116,9 @@ section:not(#hero) {
 /* --- Badge --- */
 .hero-badge {
   display: inline-block;
-  background: rgba(31, 122, 254, 0.15);
-  border: 1px solid rgba(31, 122, 254, 0.4);
-  color: #7ab8ff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -126,6 +126,7 @@ section:not(#hero) {
   border-radius: 999px;
   margin-bottom: 28px;
   text-transform: uppercase;
+  backdrop-filter: blur(4px);
 }
 
 /* --- Name --- */
@@ -247,6 +248,7 @@ section:not(#hero) {
   text-decoration: none !important;
   box-shadow: none !important;
 }
+
 /* ========== EXPERIENCES ========== */
 #experiences {
   background-color: #080808;
