@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>My Portfolio</title>
+    <title>Bryan Chan — Data &amp; Analytics Engineer</title>
+    <meta name="description" content="Bryan Chan is a Data and Analytics Engineer currently at Meta, specialising in data pipelines, ETL workflows, and operational dashboards.">
+    <link rel="icon" href="../assets/img/profile-img.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -12,10 +14,11 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="90" tabindex="0">
+
     <!-- Navbar -->
-    <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" role="navigation">
+    <nav id="mainNav" class="navbar navbar-expand-lg navbar-dark fixed-top" role="navigation">
         <div class="container-fluid" style="padding-top: 6px; padding-bottom: 6px; padding-left: 24px;">
-            <a class="navbar-brand" href="#hero">Bryan's Portfolio</a>
+            <a class="navbar-brand" href="#hero">Bryan Chan</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,14 +26,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-lg-flex align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#about-me">About Me</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#experiences">Experiences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experiences">Experience</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <!--<li class="nav-item"><a class="nav-link" href="#contact-me">Contact Me</a></li> -->
-                    <li class="nav-item"><a class="nav-link" href="mailto:bchan3391@outlook.com">Get in Touch</a></li>
+                    <li class="nav-item ms-2">
+                        <a class="nav-link nav-cta" href="mailto:bryan.cty@gmail.com">Get in Touch</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-resume" href="https://bryan-cty.github.io/my/assets/resume/BryanChan_Resume.pdf" target="_blank">Resume</a>
+                    </li>
                     <li class="nav-item ms-3">
-                        <div class="rounded-circle overflow-hidden" style="width:40px; height:40px;">
-                            <img src="../assets/img/profile-img.png" alt="Profile Picture" class="img-fluid">
+                        <div class="rounded-circle overflow-hidden" style="width:36px; height:36px;">
+                            <img src="../assets/img/profile-img.png" alt="Bryan Chan profile picture" class="img-fluid" loading="lazy">
                         </div>
                     </li>
                 </ul>
@@ -38,27 +45,16 @@
         </div>
     </nav>
 
-<!-- Hero section -->
+    <!-- Hero section -->
     <section id="hero">
         <div class="container text-center">
-    
-            <!-- Availability badge -->
-            <div class="hero-badge">Currently at Meta &middot; Open to opportunities</div>
-    
-            <!-- Name -->
+            <span class="hero-badge">Currently at Meta &middot; Open to Opportunities</span>
             <h1 class="hero-name">Bryan Chan</h1>
-    
-            <!-- Role title -->
             <p class="hero-title">Data &amp; Analytics Engineer</p>
-    
-            <!-- One-line value proposition -->
             <p class="hero-sub">
-                Building scalable data pipelines, automating cloud workflows,  
-    
-                and turning raw data into operational insight.
+                Building operational data pipelines, ETL workflows, and dashboards<br>
+                that turn raw data into decisions at scale.
             </p>
-    
-            <!-- Tech stack tags -->
             <div class="hero-tags">
                 <span>Python</span>
                 <span>SQL</span>
@@ -66,55 +62,56 @@
                 <span>Data Engineering</span>
                 <span>PowerShell</span>
             </div>
-    
-            <!-- CTA buttons -->
-            <div class="hero-ctas">
-                <a href="#projects" class="btn-hero-primary">View My Work</a>
-                <a href="#about-me" class="btn-hero-ghost">About Me</a>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary btn-lg">View My Work</a>
+                <a href="#about-me" class="btn btn-outline-light btn-lg">About Me</a>
             </div>
-    
-            <!-- Animated scroll hint -->
             <div class="hero-scroll-hint">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
             </div>
-    
         </div>
     </section>
 
     <!-- About Me section -->
     <section id="about-me" class="py-5 bg-dark text-light">
         <div class="container">
-            <h2>About Me</h2>
+            <h2 class="mb-4">About Me</h2>
             <p>
                 Hey, I'm Bryan. I'm currently at Meta working on data pipelines and dashboards for customer support operations.
-                I've been in IT for about 3+ years now, I started out in support and infrastructure, picked up data engineering along the way, 
-                and that's where I've stayed. I hold IBM Data Engineering and OCI Multicloud Architect certs, and I'm always building something on the side.
+            </p>
+            <p>
+                I've been in IT for about 4 years now — started out in support and infrastructure, picked up data engineering along the way, and that's where I've stayed. I hold IBM Data Engineering Professional and OCI Multicloud Architect certifications, and I'm always building something on the side.
             </p>
             <p>
                 When I'm not at a laptop, I'm at the gym, knitting, or out for a run.
-                If something here catches your eye, feel free to reach out
             </p>
+            <p>If something here catches your eye, feel free to reach out.</p>
         </div>
     </section>
 
     <!-- Experiences section -->
-    <section id="experiences" class="py-5 bg-dark text-light">
+    <section id="experiences" class="py-5 text-light">
         <div class="container">
-            <h2>Experiences</h2>
+            <h2 class="mb-4">Experience</h2>
 
             <!-- Row 1: Most recent -->
             <div class="row mb-4">
                 <div class="col-md-6 mb-3">
                     <div class="p-3 border rounded h-100">
                         <h3>Meta</h3>
-                        <h5>Aug 2025 – Present</h5>
+                        <h5 class="text-muted-light">Aug 2025 – Present</h5>
                         <p><strong>Operational Support Specialist</strong></p>
                         <ul>
-                            <li>Building dashboards and data pipelines to support global customer operations</li>
-                            <li>Focused on metrics development, reporting automation, and enabling data-driven decision-making across support teams.</li>
-                            <li>Develop Python/SQL data pipelines</li>
+                            <li>Built and maintained 5+ operational dashboards tracking KPIs for enterprise customer support operations, enabling data-driven decision-making across multiple business verticals.</li>
+                            <li>Developed data pipelines in Python/SQL to calculate critical operational metrics including resolution time, escalation rates, and backlog tracking for support ticket workflows.</li>
+                            <li>Created ETL processes integrating data from multiple sources to support monthly business reviews and executive reporting.</li>
+                            <li>Supported AI product pilot launch by building analytics infrastructure to measure accuracy, throughput, and operational efficiency.</li>
+                            <li>Received multiple peer recognitions for cross-functional collaboration and delivering high-quality data solutions under tight deadlines.</li>
+                            <li>Authored 10+ code contributions enhancing metrics pipelines and improving data quality through deduplication and validation logic.</li>
                         </ul>
                     </div>
                 </div>
@@ -122,10 +119,12 @@
                 <div class="col-md-6 mb-3">
                     <div class="p-3 border rounded h-100">
                         <h3>Oracle</h3>
-                        <h5>Jul 2024 – Jun 2025</h5>
-                        <p><strong>Solutions Engineer</strong></p>
+                        <h5 class="text-muted-light">Jul 2024 – Jun 2025</h5>
+                        <p><strong>Associate Solutions Engineer (Apprenticeship)</strong></p>
                         <ul>
-                            <li>Analyzed business needs and transformed challenges into tailored solutions on OCI.</li>
+                            <li>Analysed business challenges and developed tailored client solutions using Oracle Cloud Infrastructure (OCI).</li>
+                            <li>Applied expertise in database management, REST APIs (ORDS), automation, and Oracle HeatWave.</li>
+                            <li>Built a Movie Recommendation Application using Oracle APEX and HeatWave, integrating a HeatWave MySQL Database System with Oracle Analytics Cloud.</li>
                         </ul>
                     </div>
                 </div>
@@ -136,11 +135,13 @@
                 <div class="col-md-6 mb-3">
                     <div class="p-3 border rounded h-100">
                         <h3>Star Information Systems</h3>
-                        <h5>Apr 2023 – Jun 2024</h5>
+                        <h5 class="text-muted-light">Apr 2023 – Jun 2024</h5>
                         <p><strong>Technical Consultant</strong></p>
                         <ul>
-                            <li>Automated maintenance of vessel directories using PowerShell scripts.</li>
-                            <li>Monitored log files and streamlined operational workflows.</li>
+                            <li>Developed PowerShell and Python scripts to automate web scraping for vessel data and API integration.</li>
+                            <li>Implemented file management and log rotation scripts, reclaiming 10 GB of storage per vessel and saving ~1 hour of manual work per day.</li>
+                            <li>Extracted and analysed data via MSSQL to troubleshoot and resolve application issues.</li>
+                            <li>Led customer deployments using automated bootstrapping; managed support tickets in Jira.</li>
                         </ul>
                     </div>
                 </div>
@@ -148,11 +149,11 @@
                 <div class="col-md-6 mb-3">
                     <div class="p-3 border rounded h-100">
                         <h3>Netpoleon Solutions</h3>
-                        <h5>Jul 2022 – Mar 2023</h5>
+                        <h5 class="text-muted-light">Jul 2022 – Mar 2023</h5>
                         <p><strong>Associate Support Engineer</strong></p>
                         <ul>
-                            <li>Provided post-sales support, project assistance, and onsite maintenance.</li>
-                            <li>Liaised with customers and coordinated with vendor support.</li>
+                            <li>Provided post-sales support and conducted onsite maintenance for various projects, including after-hours support.</li>
+                            <li>Liaised directly with customers and vendor support teams to ensure high-quality service delivery and issue resolution.</li>
                             <li>Gained product expertise in ArcSight and Exabeam (ACA-1000).</li>
                         </ul>
                     </div>
@@ -171,44 +172,29 @@
                 <!-- Project 1 -->
                 <div class="col-md-6">
                     <div class="project-card h-100 p-4">
-                        <h3 class="project-title">Maritime Vessel Movement Analytics *work in progress*</h3>
-                        <p class="project-sub">Database Design & Data Modeling</p>
-
+                        <h3 class="project-title">Maritime Vessel Movement Analytics <span class="badge-wip">WIP</span></h3>
+                        <p class="project-sub">Database Design &amp; Data Modeling</p>
                         <p>
                             Designed a relational database system to track vessel positions, port visits, arrivals, and
-                            departures
-                            for maritime movement analysis and operational insights.
+                            departures for maritime movement analysis and operational insights.
                         </p>
-
                         <ul class="project-list">
-                            <li>Structured normalized schema for vessels, locations, voyages, and analytics</li>
-                            <li>Optimized relationships for time-series and movement tracking</li>
+                            <li>Structured normalised schema for vessels, locations, voyages, and analytics</li>
+                            <li>Optimised relationships for time-series and movement tracking</li>
                             <li>Focused on query performance and scalable design</li>
                         </ul>
-
                         <div class="project-tech">
                             <span>SQL</span>
-                            <span>SQLiteDB</span>
+                            <span>SQLite</span>
                             <span>Python</span>
                             <span>Bash</span>
                             <span>Data Modeling</span>
                         </div>
-
-                        <a href="https://github.com/bryan-cty/maritime-analytics-pipeline" target="_blank" class="github-btn">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:6px;">
-                            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38
-                            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
-                            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
-                            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-                            0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
-                            0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27
-                            1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
-                            .51.56.82 1.27.82 2.15
-                            0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
-                            0 1.07-.01 1.93-.01 2.2
-                            0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                          </svg>
-                          View on GitHub →
+                        <a href="https://github.com/bryan-cty/maritime-analytics-pipeline" target="_blank" class="github-btn" aria-label="View Maritime Analytics Pipeline on GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:6px;">
+                                <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            View on GitHub →
                         </a>
                     </div>
                 </div>
@@ -217,21 +203,18 @@
                 <div class="col-md-6">
                     <div class="project-card h-100 p-4">
                         <h3 class="project-title">Team Portal Revamp</h3>
-                        <p class="project-sub">REST APIs & Data Platform</p>
-
+                        <p class="project-sub">REST APIs &amp; Data Platform</p>
                         <p>
-                            Built a backend data platform that enables filtering of team member information by member
+                            Built a backend data platform that enables filtering of team member information
                             through REST endpoints and relational mapping.
                         </p>
-
                         <ul class="project-list">
                             <li>Designed many-to-many schema for assets and technologies</li>
                             <li>Implemented ORDS REST services for dynamic filtering</li>
                             <li>Integrated backend with frontend filtering interface</li>
                         </ul>
-
                         <div class="project-tech">
-                            <span>Oracle Automous DB</span>
+                            <span>Oracle Autonomous DB</span>
                             <span>ORDS</span>
                             <span>REST APIs</span>
                         </div>
@@ -242,33 +225,37 @@
         </div>
     </section>
 
-
     <!-- Skills section -->
-    <section id="skills" class="py-5 bg-dark text-light">
+    <section id="skills" class="py-5 text-light">
         <div class="container">
-            <h2>Skills</h2>
+            <h2 class="mb-4">Skills</h2>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <h3>Front-end Development</h3>
+                    <h3>Data Engineering</h3>
                     <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JavaScript</li>
-                        <li>Vue.js</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h3>Back-end Development</h3>
-                    <ul>
-                        <li>Java</li>
                         <li>Python</li>
-                        <li>MySQL</li>
-                        <li>PowerShell</li>
+                        <li>SQL / Presto</li>
+                        <li>ETL Pipelines</li>
+                        <li>Dashboarding &amp; Analytics</li>
+                        <li>MSSQL / SQLite</li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <h3>Design</h3>
+                    <h3>Cloud &amp; Infrastructure</h3>
                     <ul>
+                        <li>Oracle Cloud Infrastructure (OCI)</li>
+                        <li>Oracle HeatWave</li>
+                        <li>Terraform</li>
+                        <li>Linux / Windows</li>
+                        <li>PowerShell / Bash</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h3>Tools &amp; Other</h3>
+                    <ul>
+                        <li>REST APIs</li>
+                        <li>Jira</li>
+                        <li>Git / GitHub</li>
                         <li>Photoshop</li>
                         <li>FL Studio</li>
                     </ul>
@@ -277,58 +264,40 @@
         </div>
     </section>
 
-    <!-- Contact Me section 
-    <section id="contact-me" class="py-5">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <form action="https://formspree.io/f/xjvdjrbj" method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-        </div>
-    </section>  -->
-    
     <!-- Scroll to top button -->
-    <button id="scrollToTopBtn" aria-label="Scroll to top">&uarr;</button>
+    <button id="scrollToTopBtn" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+            stroke="rgba(255,255,255,0.85)" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
 
     <!-- Footer -->
     <footer class="text-light py-4" style="background:#111;">
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <p class="mb-2 mb-md-0">&copy; 2026 Bryan's Portfolio</p>
-            <ul class="list-unstyled d-flex mb-0">
-                <li class="mx-2">
-                    <a href="https://github.com/bryan-cty" class="text-light">
-                        <!-- GitHub SVG -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                            </path>
+            <p class="mb-2 mb-md-0">&copy; 2026 Bryan Chan</p>
+            <ul class="list-unstyled d-flex mb-0 align-items-center gap-3">
+                <li>
+                    <a href="https://github.com/bryan-cty" class="text-light" aria-label="GitHub" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                         </svg>
                     </a>
                 </li>
-                <li class="mx-2">
-                    <a href="https://linkedin.com/in/bryancty" class="text-light">
-                        <!-- LinkedIn SVG -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                            </path>
+                <li>
+                    <a href="https://linkedin.com/in/bryancty" class="text-light" aria-label="LinkedIn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                             <rect x="2" y="9" width="4" height="12"></rect>
                             <circle cx="4" cy="4" r="2"></circle>
                         </svg>
                     </a>
+                </li>
+                <li>
+                    <a href="mailto:bryan.cty@gmail.com" class="text-light footer-email" aria-label="Email Bryan">bryan.cty@gmail.com</a>
                 </li>
             </ul>
         </div>
@@ -349,9 +318,13 @@
                 offset: 90
             });
 
-            // Scroll button visibility
+            // Scroll button visibility — fade in/out via CSS class
             window.addEventListener("scroll", () => {
-                scrollToTopBtn.style.display = window.scrollY > 20 ? "block" : "none";
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add("visible");
+                } else {
+                    scrollToTopBtn.classList.remove("visible");
+                }
             });
 
             scrollToTopBtn.addEventListener("click", () => {
@@ -373,32 +346,8 @@
                     }
                 });
             });
-
-            // Optional section-by-section scroll for desktop
-            window.addEventListener("wheel", function (event) {
-                if (window.innerWidth < 992) return;
-
-                event.preventDefault();
-
-                const sections = [...document.querySelectorAll("section")];
-                const scrollPos = window.scrollY + 100;
-
-                let currentIndex = sections.findIndex(sec =>
-                    scrollPos >= sec.offsetTop &&
-                    scrollPos < sec.offsetTop + sec.offsetHeight
-                );
-
-                const direction = event.deltaY > 0 ? 1 : -1;
-                const nextIndex = currentIndex + direction;
-
-                if (nextIndex >= 0 && nextIndex < sections.length) {
-                    sections[nextIndex].scrollIntoView({ behavior: "smooth" });
-                }
-            }, { passive: false });
         });
     </script>
+
 </body>
-
 </html>
-
-
