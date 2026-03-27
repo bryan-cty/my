@@ -84,7 +84,7 @@
                 Hey, I'm Bryan. I'm currently at Meta working on data pipelines and dashboards for customer support operations.
             </p>
             <p>
-                I've been in IT for about 4 years now — started out in support and infrastructure, picked up data engineering along the way, and that's where I've stayed. I hold IBM Data Engineering Professional and OCI Multicloud Architect certifications, and I'm always building something on the side.
+                I've been in IT for about 3 years now — started out in support and infrastructure, picked up data engineering along the way, and that's where I've stayed. I hold IBM Data Engineering Professional and OCI Multicloud Architect certifications, and I'm always building something on the side.
             </p>
             <p>
                 When I'm not at a laptop, I'm at the gym, knitting, or out for a run.
@@ -331,6 +331,16 @@
                 window.scrollTo({ top: 0, behavior: "smooth" });
             });
 
+            // Helper: scroll precisely to a section accounting for navbar
+            const NAV_H = document.querySelector('#mainNav').offsetHeight;
+            function scrollToSection(section) {
+                if (section.id === 'hero') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.scrollTo({ top: section.offsetTop - NAV_H, behavior: 'smooth' });
+                }
+            }
+
             // Navbar smooth scrolling and auto-collapse
             const navLinks = document.querySelectorAll(".nav-link");
             navLinks.forEach(link => {
@@ -338,7 +348,7 @@
                     if (this.hash) {
                         e.preventDefault();
                         const target = document.querySelector(this.hash);
-                        target.scrollIntoView({ behavior: "smooth", block: "start" });
+                        if (target) scrollToSection(target);
                     }
                     const navbar = document.querySelector(".navbar-collapse");
                     if (navbar.classList.contains("show")) {
@@ -356,7 +366,7 @@
                 event.preventDefault();
 
                 const sections = [...document.querySelectorAll("section")];
-                const scrollPos = window.scrollY + 100;
+                const scrollPos = window.scrollY + NAV_H + 10;
 
                 let currentIndex = sections.findIndex(sec =>
                     scrollPos >= sec.offsetTop &&
@@ -368,8 +378,8 @@
 
                 if (nextIndex >= 0 && nextIndex < sections.length) {
                     isScrolling = true;
-                    sections[nextIndex].scrollIntoView({ behavior: "smooth" });
-                    setTimeout(() => { isScrolling = false; }, 800); // unlock after animation
+                    scrollToSection(sections[nextIndex]);
+                    setTimeout(() => { isScrolling = false; }, 800);
                 }
             }, { passive: false });
         });
