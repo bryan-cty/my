@@ -110,7 +110,7 @@ section:not(#hero) {
 #hero {
   background: url('../img/mesh-270.png') center center / cover no-repeat;
   color: #ffffff;
-  height: 100vh;
+  height: calc(100vh - 90px); /* subtract navbar height so hero fills exactly the visible viewport */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,6 +118,7 @@ section:not(#hero) {
   position: relative;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden; /* prevent background bleed into next section */
 }
 
 #hero .container {
