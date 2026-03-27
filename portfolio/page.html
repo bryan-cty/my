@@ -346,6 +346,32 @@
                     }
                 });
             });
+
+            // Section scroll snap on mouse wheel (desktop only)
+            let isScrolling = false;
+            window.addEventListener("wheel", function (event) {
+                if (window.innerWidth < 992) return; // disable on mobile/tablet
+                if (isScrolling) return;             // debounce: ignore rapid scrolls
+
+                event.preventDefault();
+
+                const sections = [...document.querySelectorAll("section")];
+                const scrollPos = window.scrollY + 100;
+
+                let currentIndex = sections.findIndex(sec =>
+                    scrollPos >= sec.offsetTop &&
+                    scrollPos < sec.offsetTop + sec.offsetHeight
+                );
+
+                const direction = event.deltaY > 0 ? 1 : -1;
+                const nextIndex = currentIndex + direction;
+
+                if (nextIndex >= 0 && nextIndex < sections.length) {
+                    isScrolling = true;
+                    sections[nextIndex].scrollIntoView({ behavior: "smooth" });
+                    setTimeout(() => { isScrolling = false; }, 800); // unlock after animation
+                }
+            }, { passive: false });
         });
     </script>
 
