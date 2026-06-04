@@ -3,6 +3,40 @@ const windows = Array.from(document.querySelectorAll('[data-window-id]'));
 const taskbarItems = Array.from(document.querySelectorAll('[data-taskbar-window]'));
 let topZIndex = 100;
 let activeDrag = null;
+let secretBuffer = '';
+const secretWord = 'coffee';
+
+function isMobileViewport() {
+  return window.matchMedia('(max-width: 820px)').matches;
+}
+
+function isTypingField(target) {
+  return Boolean(target?.closest?.('input, textarea, select, [contenteditable="true"]'));
+}
+
+function getTaskbarItem(id) {
+  return taskbarItems.find((item) => item.dataset.taskbarWindow === id);
+}
+
+function setWindowHiddenState(windowElement, isHidden) {
+  if (!windowElement) return;
+  windowElement.setAttribute('aria-hidden', String(isHidden));
+}
+
+function showCoffeeToast() {
+  let toast = document.querySelector('.coffee-unlock-toast');
+
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'coffee-unlock-toast';
+    toast.setAttribute('role', 'status');
+    toast.textContent = 'secret unlocked: coffee';
+    document.body.appendChild(toast);
+  }
+
+  window.requestAnimationFrame(() => toast.classList.add('is-visible'));
+  window.setTimeout(() => toast.classList.remove('is-visible'), 1800);
+}
 
 function updateClock() {
   if (!clock) return;
@@ -23,6 +57,11 @@ function syncTaskbar() {
     const windowElement = getWindow(item.dataset.taskbarWindow);
     const isOpen = windowElement?.classList.contains('is-open');
     const isActive = windowElement?.classList.contains('is-active');
+
+    if (item.dataset.taskbarWindow === 'coffee') {
+      item.hidden = !isOpen || isMobileViewport();
+    }
+
     item.classList.toggle('is-running', Boolean(isOpen));
     item.classList.toggle('is-active', Boolean(isActive));
   });
@@ -33,22 +72,34 @@ function focusWindow(windowElement) {
   windows.forEach((item) => item.classList.remove('is-active'));
   windowElement.classList.add('is-active', 'is-open');
   windowElement.classList.remove('is-minimized');
+  setWindowHiddenState(windowElement, false);
   topZIndex += 1;
   windowElement.style.zIndex = String(topZIndex);
   syncTaskbar();
 }
 
 function openWindow(id, shouldFocus = true) {
+  if (id === 'coffee' && isMobileViewport()) return;
+
   const windowElement = getWindow(id);
   if (!windowElement) return;
+
   windowElement.classList.add('is-open');
   windowElement.classList.remove('is-minimized');
+  setWindowHiddenState(windowElement, false);
+
+  const taskbarItem = getTaskbarItem(id);
+  if (taskbarItem && id !== 'coffee') taskbarItem.hidden = false;
+  if (taskbarItem && id === 'coffee') taskbarItem.hidden = isMobileViewport();
+
   if (shouldFocus) focusWindow(windowElement);
+  syncTaskbar();
 }
 
 function closeWindow(windowElement) {
   if (!windowElement) return;
   windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
+  setWindowHiddenState(windowElement, true);
   syncTaskbar();
 }
 
@@ -140,11 +191,38 @@ document.querySelectorAll('.folder-list a').forEach((link) => {
 });
 
 window.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape') return;
-  const activeWindow = windows.find((item) => item.classList.contains('is-active'));
-  if (activeWindow && activeWindow.dataset.windowId !== 'welcome') {
-    closeWindow(activeWindow);
+  if (event.key === 'Escape') {
+    const activeWindow = windows.find((item) => item.classList.contains('is-active'));
+    if (activeWindow && activeWindow.dataset.windowId !== 'welcome') {
+      closeWindow(activeWindow);
+    }
+    return;
   }
+
+  if (isMobileViewport()) return;
+  if (isTypingField(event.target)) return;
+  if (event.ctrlKey || event.metaKey || event.altKey) return;
+  if (event.key.length !== 1) return;
+
+  secretBuffer = `${secretBuffer}${event.key.toLowerCase()}`.slice(-secretWord.length);
+
+  if (secretBuffer === secretWord) {
+    openWindow('coffee');
+    showCoffeeToast();
+    secretBuffer = '';
+  }
+});
+
+window.addEventListener('resize', () => {
+  const coffeeWindow = getWindow('coffee');
+  if (isMobileViewport() && coffeeWindow?.classList.contains('is-open')) {
+    closeWindow(coffeeWindow);
+  }
+  syncTaskbar();
+});
+
+windows.forEach((windowElement) => {
+  setWindowHiddenState(windowElement, !windowElement.classList.contains('is-open'));
 });
 
 openWindow('welcome', true);
