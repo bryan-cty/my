@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/styles/retro.css" />
+  <link rel="stylesheet" href="./retro.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,28 +26,28 @@
       <span>BryanOS 1.0</span>
     </a>
     <nav class="quick-nav" aria-label="Quick navigation">
-      <a href="#experience">experience</a>
-      <a href="#projects">projects</a>
-      <a href="mailto:bryan.cty@gmail.com">contact</a>
+      <a href="#experience" data-open-window="experience">experience</a>
+      <a href="#projects" data-open-window="projects">projects</a>
+      <a href="#contact" data-open-window="contact">contact</a>
       <a class="resume-link" href="../assets/bryan.pdf" target="_blank" rel="noopener">resume.pdf</a>
     </nav>
   </header>
 
   <main id="main" class="desktop-shell">
     <section class="desktop-icons" aria-label="Desktop shortcuts">
-      <a class="desktop-icon" href="#about" data-window="about-window">
+      <a class="desktop-icon" href="#about" data-open-window="about">
         <span aria-hidden="true">👤</span>
         <strong>about.exe</strong>
       </a>
-      <a class="desktop-icon" href="#experience" data-window="experience-window">
+      <a class="desktop-icon" href="#experience" data-open-window="experience">
         <span aria-hidden="true">📁</span>
         <strong>experience</strong>
       </a>
-      <a class="desktop-icon" href="#projects" data-window="projects-window">
+      <a class="desktop-icon" href="#projects" data-open-window="projects">
         <span aria-hidden="true">🗂️</span>
         <strong>projects</strong>
       </a>
-      <a class="desktop-icon" href="#skills" data-window="skills-window">
+      <a class="desktop-icon" href="#skills" data-open-window="skills">
         <span aria-hidden="true">▸_</span>
         <strong>skills.sh</strong>
       </a>
@@ -55,16 +55,20 @@
         <span aria-hidden="true">📄</span>
         <strong>resume.pdf</strong>
       </a>
-      <a class="desktop-icon" href="#contact" data-window="contact-window">
+      <a class="desktop-icon" href="#contact" data-open-window="contact">
         <span aria-hidden="true">✉</span>
         <strong>contact.msg</strong>
       </a>
     </section>
 
-    <section class="window hero-window is-active" aria-labelledby="hero-title">
-      <div class="window-titlebar">
+    <section id="welcome" class="window hero-window desktop-window is-open is-active" data-window-id="welcome" style="--window-left: 300px; --window-top: 128px; --window-width: 860px;" aria-labelledby="hero-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>welcome.txt</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body hero-grid">
         <div>
@@ -74,7 +78,7 @@
           <p class="hero-copy">I build Python/SQL pipelines, ETL workflows, and operational dashboards for support and enterprise workflows.</p>
           <div class="hero-actions" aria-label="Primary actions">
             <a class="button primary" href="../assets/bryan.pdf" target="_blank" rel="noopener">open resume</a>
-            <a class="button" href="#projects">view projects</a>
+            <a class="button" href="#projects" data-open-window="projects">view projects</a>
             <a class="button" href="mailto:bryan.cty@gmail.com">contact</a>
           </div>
         </div>
@@ -90,10 +94,14 @@
       </div>
     </section>
 
-    <section id="about" class="window content-window" aria-labelledby="about-title">
-      <div class="window-titlebar">
+    <section id="about" class="window content-window desktop-window" data-window-id="about" style="--window-left: 260px; --window-top: 180px; --window-width: 760px;" aria-labelledby="about-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>about.exe</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body">
         <h2 id="about-title">about bryan</h2>
@@ -112,10 +120,14 @@
       </div>
     </section>
 
-    <section id="experience" class="window content-window wide-window" aria-labelledby="experience-title">
-      <div class="window-titlebar">
+    <section id="experience" class="window content-window wide-window desktop-window" data-window-id="experience" style="--window-left: 210px; --window-top: 130px; --window-width: 980px;" aria-labelledby="experience-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>experience.timeline</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body">
         <h2 id="experience-title">experience</h2>
@@ -156,10 +168,14 @@
       </div>
     </section>
 
-    <section id="projects" class="window content-window wide-window" aria-labelledby="projects-title">
-      <div class="window-titlebar">
+    <section id="projects" class="window content-window wide-window desktop-window" data-window-id="projects" style="--window-left: 240px; --window-top: 150px; --window-width: 980px;" aria-labelledby="projects-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>projects/</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body explorer-layout">
         <aside class="folder-list" aria-label="Project folders">
@@ -196,10 +212,14 @@
       </div>
     </section>
 
-    <section id="skills" class="window terminal-window" aria-labelledby="skills-title">
-      <div class="window-titlebar">
+    <section id="skills" class="window terminal-window desktop-window" data-window-id="skills" style="--window-left: 330px; --window-top: 205px; --window-width: 760px;" aria-labelledby="skills-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>skills.sh</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body terminal-body">
         <h2 id="skills-title">technical skills</h2>
@@ -215,10 +235,14 @@ oci multicloud architect professional</pre>
       </div>
     </section>
 
-    <section id="contact" class="window content-window contact-window" aria-labelledby="contact-title">
-      <div class="window-titlebar">
+    <section id="contact" class="window content-window contact-window desktop-window" data-window-id="contact" style="--window-left: 390px; --window-top: 230px; --window-width: 620px;" aria-labelledby="contact-title" tabindex="-1">
+      <div class="window-titlebar" data-drag-handle>
         <span>contact.msg</span>
-        <span class="window-controls" aria-hidden="true"><b></b><b></b><b></b></span>
+        <span class="window-controls">
+          <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">_</button>
+          <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">□</button>
+          <button type="button" class="window-control" data-window-action="close" aria-label="Close window">×</button>
+        </span>
       </div>
       <div class="window-body">
         <h2 id="contact-title">get in touch</h2>
@@ -233,14 +257,17 @@ oci multicloud architect professional</pre>
   </main>
 
   <footer class="taskbar" aria-label="Desktop taskbar">
-    <a href="#main" class="start-button">start</a>
-    <a href="#about">about</a>
-    <a href="#projects">projects</a>
+    <button type="button" class="start-button" data-open-window="welcome">start</button>
+    <button type="button" class="taskbar-item is-running" data-open-window="welcome" data-taskbar-window="welcome">welcome.txt</button>
+    <button type="button" class="taskbar-item" data-open-window="about" data-taskbar-window="about">about.exe</button>
+    <button type="button" class="taskbar-item" data-open-window="experience" data-taskbar-window="experience">experience</button>
+    <button type="button" class="taskbar-item" data-open-window="projects" data-taskbar-window="projects">projects</button>
+    <button type="button" class="taskbar-item" data-open-window="skills" data-taskbar-window="skills">skills.sh</button>
     <a href="../assets/bryan.pdf" target="_blank" rel="noopener">resume.pdf</a>
-    <a href="mailto:bryan.cty@gmail.com">bryan.cty@gmail.com</a>
+    <button type="button" class="taskbar-item" data-open-window="contact" data-taskbar-window="contact">contact.msg</button>
     <span class="clock" id="clock" aria-label="Current time">--:--</span>
   </footer>
 
-  <script src="../assets/js/retro.js"></script>
+  <script src="./retro.js"></script>
 </body>
 </html>
