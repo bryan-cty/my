@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/styles/retro.css" />
+  <link rel="stylesheet" href="./retro.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -25,12 +25,11 @@
       <span class="brand-mark">▣</span>
       <span>BryanOS 1.0</span>
     </a>
-    <nav class="quick-nav" aria-label="Quick navigation">
-      <a href="#experience" data-open-window="experience">experience</a>
-      <a href="#projects" data-open-window="projects">projects</a>
-      <a href="#contact" data-open-window="contact">contact</a>
-      <a class="resume-link" href="../assets/docs/bryan.pdf" target="_blank" rel="noopener">resume.pdf</a>
-    </nav>
+    <div class="topbar-links" aria-label="External links">
+      <a href="https://github.com/bryan-cty" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/bryan-chan/" target="_blank" rel="noopener">linkedin</a>
+      <a class="resume-link" href="../assets/bryan.pdf" target="_blank" rel="noopener">resume</a>
+    </div>
   </header>
 
   <main id="main" class="desktop-shell">
@@ -268,6 +267,6 @@ oci multicloud architect professional</pre>
     <span class="clock" id="clock" aria-label="Current time">--:--</span>
   </footer>
 
-  <script src="../assets/js/retro.js"></script>
+  <script src="./retro.js"></script>
 </body>
 </html>
