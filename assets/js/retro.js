@@ -1,6 +1,6 @@
 const clock = document.querySelector('#clock');
+const taskbarApps = document.querySelector('#taskbarApps');
 const windows = Array.from(document.querySelectorAll('[data-window-id]'));
-const taskbarItems = Array.from(document.querySelectorAll('[data-taskbar-window]'));
 let topZIndex = 100;
 let activeDrag = null;
 let secretBuffer = '';
@@ -14,13 +14,61 @@ function isTypingField(target) {
   return Boolean(target?.closest?.('input, textarea, select, [contenteditable="true"]'));
 }
 
-function getTaskbarItem(id) {
-  return taskbarItems.find((item) => item.dataset.taskbarWindow === id);
-}
-
 function setWindowHiddenState(windowElement, isHidden) {
   if (!windowElement) return;
   windowElement.setAttribute('aria-hidden', String(isHidden));
+}
+
+function getWindow(id) {
+  return windows.find((windowElement) => windowElement.dataset.windowId === id);
+}
+
+function getWindowTitle(windowElement) {
+  return windowElement?.querySelector('.window-titlebar > span:first-child')?.textContent?.trim()
+    || windowElement?.dataset.windowId
+    || 'window';
+}
+
+function getOpenWindowsForTaskbar() {
+  return windows.filter((windowElement) => {
+    const id = windowElement.dataset.windowId;
+    if (id === 'coffee' && isMobileViewport()) return false;
+    return windowElement.classList.contains('is-open');
+  });
+}
+
+function syncTaskbar() {
+  if (!taskbarApps) return;
+
+  taskbarApps.innerHTML = '';
+
+  getOpenWindowsForTaskbar().forEach((windowElement) => {
+    const id = windowElement.dataset.windowId;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'taskbar-item is-running';
+    button.dataset.openWindow = id;
+    button.dataset.taskbarWindow = id;
+    button.textContent = getWindowTitle(windowElement);
+
+    if (windowElement.classList.contains('is-active')) {
+      button.classList.add('is-active');
+    }
+
+    if (windowElement.classList.contains('is-minimized')) {
+      button.classList.add('is-minimized');
+    }
+
+    button.addEventListener('click', () => {
+      if (windowElement.classList.contains('is-minimized') || !windowElement.classList.contains('is-active')) {
+        focusWindow(windowElement);
+      } else {
+        minimizeWindow(windowElement);
+      }
+    });
+
+    taskbarApps.appendChild(button);
+  });
 }
 
 function showCoffeeToast() {
@@ -48,25 +96,6 @@ function updateClock() {
   });
 }
 
-function getWindow(id) {
-  return windows.find((windowElement) => windowElement.dataset.windowId === id);
-}
-
-function syncTaskbar() {
-  taskbarItems.forEach((item) => {
-    const windowElement = getWindow(item.dataset.taskbarWindow);
-    const isOpen = windowElement?.classList.contains('is-open');
-    const isActive = windowElement?.classList.contains('is-active');
-
-    if (item.dataset.taskbarWindow === 'coffee') {
-      item.hidden = !isOpen || isMobileViewport();
-    }
-
-    item.classList.toggle('is-running', Boolean(isOpen));
-    item.classList.toggle('is-active', Boolean(isActive));
-  });
-}
-
 function focusWindow(windowElement) {
   if (!windowElement) return;
   windows.forEach((item) => item.classList.remove('is-active'));
@@ -88,10 +117,6 @@ function openWindow(id, shouldFocus = true) {
   windowElement.classList.remove('is-minimized');
   setWindowHiddenState(windowElement, false);
 
-  const taskbarItem = getTaskbarItem(id);
-  if (taskbarItem && id !== 'coffee') taskbarItem.hidden = false;
-  if (taskbarItem && id === 'coffee') taskbarItem.hidden = isMobileViewport();
-
   if (shouldFocus) focusWindow(windowElement);
   syncTaskbar();
 }
@@ -100,18 +125,32 @@ function closeWindow(windowElement) {
   if (!windowElement) return;
   windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
   setWindowHiddenState(windowElement, true);
-  syncTaskbar();
+
+  const nextWindow = [...windows]
+    .filter((item) => item !== windowElement && item.classList.contains('is-open') && !item.classList.contains('is-minimized'))
+    .sort((a, b) => Number(b.style.zIndex || 0) - Number(a.style.zIndex || 0))[0];
+
+  if (nextWindow) {
+    focusWindow(nextWindow);
+  } else {
+    syncTaskbar();
+  }
 }
 
 function minimizeWindow(windowElement) {
   if (!windowElement) return;
   windowElement.classList.add('is-minimized');
   windowElement.classList.remove('is-active');
+
   const nextWindow = [...windows]
     .filter((item) => item !== windowElement && item.classList.contains('is-open') && !item.classList.contains('is-minimized'))
     .sort((a, b) => Number(b.style.zIndex || 0) - Number(a.style.zIndex || 0))[0];
-  if (nextWindow) focusWindow(nextWindow);
-  syncTaskbar();
+
+  if (nextWindow) {
+    focusWindow(nextWindow);
+  } else {
+    syncTaskbar();
+  }
 }
 
 function toggleMaximize(windowElement) {
@@ -138,7 +177,7 @@ windows.forEach((windowElement) => {
 
   handle.addEventListener('pointerdown', (event) => {
     if (event.target.closest('.window-control')) return;
-    if (window.matchMedia('(max-width: 820px)').matches) return;
+    if (isMobileViewport()) return;
     if (windowElement.classList.contains('is-maximized')) return;
 
     focusWindow(windowElement);
@@ -193,9 +232,7 @@ document.querySelectorAll('.folder-list a').forEach((link) => {
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     const activeWindow = windows.find((item) => item.classList.contains('is-active'));
-    if (activeWindow && activeWindow.dataset.windowId !== 'welcome') {
-      closeWindow(activeWindow);
-    }
+    if (activeWindow) closeWindow(activeWindow);
     return;
   }
 
