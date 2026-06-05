@@ -206,6 +206,7 @@
       windowElement.style.maxHeight = '';
       const body = windowElement.querySelector('.window-body');
       if (body) body.style.maxHeight = '';
+      document.body.classList.add('mobile-window-open');
     }
 
     windowElement.classList.add('is-open');
@@ -296,6 +297,15 @@
     }
     window.requestAnimationFrame(() => toast.classList.add('is-visible'));
     window.setTimeout(() => toast.classList.remove('is-visible'), 1800);
+  }
+
+
+  if (isMobile()) {
+    windows.forEach((windowElement) => {
+      windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
+      setWindowHiddenState(windowElement, true);
+    });
+    document.body.classList.remove('mobile-window-open');
   }
 
   function updateClock() {
