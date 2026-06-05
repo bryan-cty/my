@@ -1,5 +1,7 @@
 const clock = document.querySelector('#clock');
 const taskbarApps = document.querySelector('#taskbarApps');
+const startButton = document.querySelector('#startButton');
+const startMenu = document.querySelector('#startMenu');
 const windows = Array.from(document.querySelectorAll('[data-window-id]'));
 const desktopShell = document.querySelector('.desktop-shell');
 let topZIndex = 100;
@@ -13,6 +15,27 @@ function isMobileViewport() {
 
 function isTypingField(target) {
   return Boolean(target?.closest?.('input, textarea, select, [contenteditable="true"]'));
+}
+
+
+function isStartMenuOpen() {
+  return Boolean(startMenu && !startMenu.hasAttribute('hidden'));
+}
+
+function setStartMenuOpen(isOpen) {
+  if (!startMenu || !startButton) return;
+
+  if (isOpen) {
+    startMenu.removeAttribute('hidden');
+    startButton.setAttribute('aria-expanded', 'true');
+  } else {
+    startMenu.setAttribute('hidden', '');
+    startButton.setAttribute('aria-expanded', 'false');
+  }
+}
+
+function toggleStartMenu() {
+  setStartMenuOpen(!isStartMenuOpen());
 }
 
 function setWindowHiddenState(windowElement, isHidden) {
@@ -282,12 +305,36 @@ windows.forEach((windowElement) => {
   });
 });
 
+if (startButton) {
+  startButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleStartMenu();
+  });
+}
+
+if (startMenu) {
+  startMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+}
+
+document.addEventListener('click', (event) => {
+  if (!isStartMenuOpen()) return;
+  if (event.target.closest('#startMenu') || event.target.closest('#startButton')) return;
+  setStartMenuOpen(false);
+});
+
 document.querySelectorAll('[data-open-window]').forEach((trigger) => {
   trigger.addEventListener('click', (event) => {
     const id = trigger.dataset.openWindow;
     if (!id) return;
     event.preventDefault();
     openWindow(id);
+
+    if (trigger.closest('#startMenu')) {
+      setStartMenuOpen(false);
+    }
   });
 });
 
@@ -312,6 +359,12 @@ document.querySelectorAll('.folder-list a').forEach((link) => {
 
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
+    if (isStartMenuOpen()) {
+      setStartMenuOpen(false);
+      startButton?.focus();
+      return;
+    }
+
     const activeWindow = windows.find((item) => item.classList.contains('is-active'));
     if (activeWindow) closeWindow(activeWindow);
     return;
@@ -337,6 +390,10 @@ fitAllOpenWindows();
 syncTaskbar();
 
 window.addEventListener('resize', () => {
+  if (isMobileViewport()) {
+    setStartMenuOpen(false);
+  }
+
   const coffeeWindow = getWindow('coffee');
   if (isMobileViewport() && coffeeWindow?.classList.contains('is-open')) {
     closeWindow(coffeeWindow);

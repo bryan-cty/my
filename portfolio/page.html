@@ -280,28 +280,28 @@ oci multicloud architect professional</pre>
         <p class="coffee-intro">Not everything I build is digital. Here are a few cups from the offline side of BryanOS.</p>
         <div class="coffee-grid" aria-label="Latte art gallery">
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-01.jpg" alt="Latte art photo 1">
-            <figcaption>latte-art-01.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-01.jpg" alt="Latte art photo 1">
+            <figcaption>latte-01.jpg</figcaption>
           </figure>
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-02.jpg" alt="Latte art photo 2">
-            <figcaption>latte-art-02.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-02.jpg" alt="Latte art photo 2">
+            <figcaption>latte-02.jpg</figcaption>
           </figure>
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-03.jpg" alt="Latte art photo 3">
-            <figcaption>latte-art-03.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-03.jpg" alt="Latte art photo 3">
+            <figcaption>latte-03.jpg</figcaption>
           </figure>
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-04.jpg" alt="Latte art photo 4">
-            <figcaption>latte-art-04.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-04.jpg" alt="Latte art photo 4">
+            <figcaption>latte-04.jpg</figcaption>
           </figure>
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-05.jpg" alt="Latte art photo 5">
-            <figcaption>latte-art-05.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-05.jpg" alt="Latte art photo 5">
+            <figcaption>latte-05.jpg</figcaption>
           </figure>
           <figure class="coffee-card">
-            <img src="../assets/img/coffee/latte-art-06.jpg" alt="Latte art photo 6">
-            <figcaption>latte-art-06.jpg</figcaption>
+            <img src="../assets/img/coffee/latte-06.jpg" alt="Latte art photo 6">
+            <figcaption>latte-06.jpg</figcaption>
           </figure>
         </div>
         <p class="coffee-caption">hint: this window only appears on desktop when someone types <code>coffee</code>.</p>
@@ -310,7 +310,61 @@ oci multicloud architect professional</pre>
   </main>
 
   <footer class="taskbar" aria-label="Desktop taskbar">
-    <button type="button" class="start-button" data-open-window="welcome" aria-label="Open BryanOS start window">start</button>
+    <button type="button" class="start-button" id="startButton" aria-haspopup="menu" aria-expanded="false" aria-controls="startMenu">
+      <img src="../assets/img/icons/bryanos.png" alt="" aria-hidden="true">
+      <span>start</span>
+    </button>
+
+    <nav class="start-menu" id="startMenu" aria-label="BryanOS start menu" hidden>
+      <div class="start-menu-rail">BryanOS</div>
+      <div class="start-menu-panel" role="menu">
+        <div class="start-menu-header">
+          <img src="../assets/img/icons/bryanos.png" alt="" aria-hidden="true">
+          <div>
+            <strong>BryanOS 1.0</strong>
+            <span>Data & Analytics Engineer</span>
+          </div>
+        </div>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="welcome">
+          <img src="../assets/img/icons/bryanos.png" alt="" aria-hidden="true">
+          <span>welcome.txt</span>
+        </button>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="about">
+          <img src="../assets/img/icons/about.png" alt="" aria-hidden="true">
+          <span>about.exe</span>
+        </button>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="experience">
+          <img src="../assets/img/icons/experience.png" alt="" aria-hidden="true">
+          <span>experience</span>
+        </button>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="projects">
+          <img src="../assets/img/icons/projects.png" alt="" aria-hidden="true">
+          <span>projects</span>
+        </button>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="skills">
+          <img src="../assets/img/icons/skills.png" alt="" aria-hidden="true">
+          <span>skills.sh</span>
+        </button>
+        <button type="button" class="start-menu-item" role="menuitem" data-open-window="contact">
+          <img src="../assets/img/icons/contact.png" alt="" aria-hidden="true">
+          <span>contact.msg</span>
+        </button>
+        <div class="start-menu-divider" aria-hidden="true"></div>
+        <a class="start-menu-item" role="menuitem" href="../assets/docs/bryan.pdf" target="_blank" rel="noopener">
+          <img src="../assets/img/icons/resume.png" alt="" aria-hidden="true">
+          <span>resume.pdf</span>
+        </a>
+        <a class="start-menu-item" role="menuitem" href="https://github.com/bryan-cty" target="_blank" rel="noopener">
+          <img src="../assets/img/icons/github.png" alt="" aria-hidden="true">
+          <span>github</span>
+        </a>
+        <a class="start-menu-item" role="menuitem" href="https://www.linkedin.com/in/bryan-chan/" target="_blank" rel="noopener">
+          <img src="../assets/img/icons/linkedin.png" alt="" aria-hidden="true">
+          <span>linkedin</span>
+        </a>
+      </div>
+    </nav>
+
     <div class="taskbar-apps" id="taskbarApps" aria-label="Open windows"></div>
     <span class="clock" id="clock" aria-label="Current time">--:--</span>
   </footer>
