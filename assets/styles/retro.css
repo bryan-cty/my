@@ -640,3 +640,190 @@ p { line-height: 1.65; }
     display: none;
   }
 }
+
+/* FINAL OVERRIDE: BryanOS traffic-light window controls
+   Attribute selectors make this work even if older HTML lacks minimize/maximize/close classes. */
+.window-titlebar .window-controls .window-control,
+.window-titlebar .window-controls button[data-window-action] {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid #15120f !important;
+  color: #15120f !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.28) !important;
+  filter: none !important;
+}
+
+.window-titlebar .window-controls .window-control.minimize,
+.window-titlebar .window-controls button[data-window-action="minimize"] {
+  background: #f4c542 !important;
+}
+
+.window-titlebar .window-controls .window-control.maximize,
+.window-titlebar .window-controls button[data-window-action="maximize"] {
+  background: #6fcf97 !important;
+}
+
+.window-titlebar .window-controls .window-control.close,
+.window-titlebar .window-controls button[data-window-action="close"] {
+  background: #e85d5d !important;
+}
+
+.window-titlebar .window-controls .window-control:hover,
+.window-titlebar .window-controls button[data-window-action]:hover,
+.window-titlebar .window-controls .window-control:focus-visible,
+.window-titlebar .window-controls button[data-window-action]:focus-visible {
+  outline: 2px solid #fff4bf;
+  outline-offset: 1px;
+  filter: brightness(1.08) contrast(1.04) !important;
+}
+
+.window-titlebar .window-controls .window-control:active,
+.window-titlebar .window-controls button[data-window-action]:active {
+  transform: translate(1px, 1px);
+  box-shadow:
+    inset -1px -1px 0 rgba(255, 255, 255, 0.35),
+    inset 1px 1px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+/* === HARD DESKTOP VIEWPORT FIX ===
+   Desktop mode must behave like an OS desktop: the page itself never scrolls.
+   Only each window body scrolls internally. */
+:root {
+  --topbar-height: 48px;
+  --taskbar-height: 52px;
+}
+
+@media (min-width: 821px) {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+
+  body {
+    position: fixed;
+    inset: 0;
+    overflow: hidden !important;
+  }
+
+  .topbar {
+    height: var(--topbar-height);
+    min-height: var(--topbar-height);
+    max-height: var(--topbar-height);
+    padding: 0 1rem;
+    overflow: hidden;
+  }
+
+  .taskbar {
+    height: var(--taskbar-height);
+    min-height: var(--taskbar-height);
+    max-height: var(--taskbar-height);
+    padding: 0.45rem 0.75rem;
+    overflow: hidden;
+  }
+
+  .desktop-shell {
+    position: fixed !important;
+    inset: var(--topbar-height) 0 var(--taskbar-height) 0 !important;
+    width: 100vw !important;
+    height: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  .desktop-icons {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: 128px;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 0;
+    z-index: 1;
+  }
+
+  .desktop-icon span {
+    width: 3.15rem;
+    height: 3.15rem;
+  }
+
+  .desktop-window {
+    position: absolute !important;
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    max-width: none !important;
+    min-height: 0;
+    margin: 0 !important;
+    overflow: hidden;
+  }
+
+  .desktop-window:not(.is-open),
+  .desktop-window.is-minimized {
+    display: none !important;
+  }
+
+  .desktop-window.is-maximized {
+    left: 1rem !important;
+    top: 1rem !important;
+    width: calc(100vw - 2rem) !important;
+    height: calc(100dvh - var(--topbar-height) - var(--taskbar-height) - 2rem) !important;
+    max-height: none !important;
+  }
+
+  .desktop-window .window-titlebar {
+    flex: 0 0 auto;
+  }
+
+  .desktop-window .window-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto !important;
+  }
+
+  .desktop-window.is-maximized .window-body {
+    max-height: none !important;
+  }
+}
+
+/* Desktop downscaling for narrower laptop widths. */
+@media (min-width: 821px) and (max-width: 1050px) {
+  .desktop-icons {
+    width: 104px;
+  }
+
+  .desktop-icon {
+    font-size: 0.68rem;
+  }
+
+  .desktop-icon span {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}
+
+/* Make the traffic-light controls impossible for older generic rules to override. */
+.window-titlebar .window-controls button[data-window-action="minimize"] {
+  background-color: #f4c542 !important;
+  background-image: none !important;
+}
+
+.window-titlebar .window-controls button[data-window-action="maximize"] {
+  background-color: #6fcf97 !important;
+  background-image: none !important;
+}
+
+.window-titlebar .window-controls button[data-window-action="close"] {
+  background-color: #e85d5d !important;
+  background-image: none !important;
+}

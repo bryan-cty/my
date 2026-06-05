@@ -1,6 +1,7 @@
 const clock = document.querySelector('#clock');
 const taskbarApps = document.querySelector('#taskbarApps');
 const windows = Array.from(document.querySelectorAll('[data-window-id]'));
+const desktopShell = document.querySelector('.desktop-shell');
 let topZIndex = 100;
 let activeDrag = null;
 let secretBuffer = '';
@@ -101,6 +102,7 @@ function focusWindow(windowElement) {
   setWindowHiddenState(windowElement, false);
   topZIndex += 1;
   windowElement.style.zIndex = String(topZIndex);
+  fitWindowToViewport(windowElement);
   syncTaskbar();
 }
 
@@ -114,6 +116,7 @@ function openWindow(id, shouldFocus = true) {
   windowElement.classList.remove('is-minimized');
   setWindowHiddenState(windowElement, false);
 
+  fitWindowToViewport(windowElement);
   if (shouldFocus) focusWindow(windowElement);
   syncTaskbar();
 }
@@ -154,13 +157,89 @@ function toggleMaximize(windowElement) {
   if (!windowElement) return;
   focusWindow(windowElement);
   windowElement.classList.toggle('is-maximized');
+  if (!windowElement.classList.contains('is-maximized')) fitWindowToViewport(windowElement);
+  syncTaskbar();
+}
+
+function clampNumber(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function getCssNumber(windowElement, variableName, fallback) {
+  const raw = window.getComputedStyle(windowElement).getPropertyValue(variableName).trim();
+  const value = Number.parseFloat(raw);
+  return Number.isFinite(value) ? value : fallback;
+}
+
+function getShellBounds() {
+  const shell = desktopShell || document.documentElement;
+  return {
+    width: shell.clientWidth || window.innerWidth,
+    height: shell.clientHeight || window.innerHeight,
+  };
+}
+
+function fitWindowToViewport(windowElement, options = {}) {
+  if (!windowElement || isMobileViewport()) return;
+  if (!windowElement.classList.contains('is-open')) return;
+  if (windowElement.classList.contains('is-maximized')) return;
+
+  const { width: shellWidth, height: shellHeight } = getShellBounds();
+  const gap = 14;
+  const iconRail = shellWidth >= 960 ? 152 : 118;
+  const desiredWidth = getCssNumber(windowElement, '--window-width', 760);
+  const maxWidth = Math.max(320, shellWidth - iconRail - gap * 2);
+  const width = clampNumber(desiredWidth, 320, maxWidth);
+
+  windowElement.style.width = `${width}px`;
+
+  const hasUserPosition = windowElement.dataset.userPositioned === 'true';
+  const desiredLeft = getCssNumber(windowElement, '--window-left', iconRail + gap);
+  const desiredTop = getCssNumber(windowElement, '--window-top', gap);
+
+  let currentLeft = Number.parseFloat(windowElement.style.left);
+  let currentTop = Number.parseFloat(windowElement.style.top);
+
+  if (options.reset || !hasUserPosition || !Number.isFinite(currentLeft)) currentLeft = desiredLeft;
+  if (options.reset || !hasUserPosition || !Number.isFinite(currentTop)) currentTop = desiredTop;
+
+  const minLeft = shellWidth >= 760 ? iconRail : gap;
+  const maxLeft = Math.max(minLeft, shellWidth - width - gap);
+
+  // Keep at least a small visible body area. The real content scrolls inside .window-body.
+  const minVisibleWindowHeight = 210;
+  const maxTop = Math.max(gap, shellHeight - minVisibleWindowHeight);
+  const left = clampNumber(currentLeft, minLeft, maxLeft);
+  const top = clampNumber(currentTop, gap, maxTop);
+
+  windowElement.style.left = `${left}px`;
+  windowElement.style.top = `${top}px`;
+
+  const titlebar = windowElement.querySelector('.window-titlebar');
+  const body = windowElement.querySelector('.window-body');
+  const titlebarHeight = titlebar?.offsetHeight || 44;
+  const maxWindowHeight = Math.max(minVisibleWindowHeight, shellHeight - top - gap);
+  const maxBodyHeight = Math.max(150, maxWindowHeight - titlebarHeight - 8);
+
+  windowElement.style.maxHeight = `${maxWindowHeight}px`;
+  if (body) body.style.maxHeight = `${maxBodyHeight}px`;
+}
+
+function fitAllOpenWindows() {
+  windows.forEach((windowElement) => fitWindowToViewport(windowElement));
 }
 
 function setWindowPosition(windowElement, left, top) {
-  const maxLeft = Math.max(12, window.innerWidth - windowElement.offsetWidth - 12);
-  const maxTop = Math.max(64, window.innerHeight - windowElement.offsetHeight - 64);
-  windowElement.style.left = `${Math.min(Math.max(12, left), maxLeft)}px`;
-  windowElement.style.top = `${Math.min(Math.max(64, top), maxTop)}px`;
+  if (!windowElement) return;
+  windowElement.dataset.userPositioned = 'true';
+  const { width: shellWidth, height: shellHeight } = getShellBounds();
+  const gap = 12;
+  const width = windowElement.offsetWidth || getCssNumber(windowElement, '--window-width', 760);
+  const maxLeft = Math.max(gap, shellWidth - width - gap);
+  const maxTop = Math.max(gap, shellHeight - 180);
+  windowElement.style.left = `${clampNumber(left, gap, maxLeft)}px`;
+  windowElement.style.top = `${clampNumber(top, gap, maxTop)}px`;
+  fitWindowToViewport(windowElement);
 }
 
 updateClock();
@@ -190,7 +269,12 @@ windows.forEach((windowElement) => {
 
   handle.addEventListener('pointermove', (event) => {
     if (!activeDrag || activeDrag.pointerId !== event.pointerId) return;
-    setWindowPosition(activeDrag.windowElement, event.clientX - activeDrag.offsetX, event.clientY - activeDrag.offsetY);
+    const shellRect = (desktopShell || document.body).getBoundingClientRect();
+    setWindowPosition(
+      activeDrag.windowElement,
+      event.clientX - shellRect.left - activeDrag.offsetX,
+      event.clientY - shellRect.top - activeDrag.offsetY
+    );
   });
 
   handle.addEventListener('pointerup', () => {
@@ -248,7 +332,8 @@ window.addEventListener('keydown', (event) => {
 });
 
 
-// Initial taskbar paint. Without this, welcome.txt is open but no running-app button is rendered yet.
+// Initial desktop fit + taskbar paint.
+fitAllOpenWindows();
 syncTaskbar();
 
 window.addEventListener('resize', () => {
@@ -256,6 +341,7 @@ window.addEventListener('resize', () => {
   if (isMobileViewport() && coffeeWindow?.classList.contains('is-open')) {
     closeWindow(coffeeWindow);
   }
+  fitAllOpenWindows();
   syncTaskbar();
 });
 
