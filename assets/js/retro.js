@@ -11,9 +11,14 @@
   let secretBuffer = '';
   const secretWord = 'coffee';
   const desktopQuery = window.matchMedia('(min-width: 821px)');
+  const mobileQuery = window.matchMedia('(max-width: 820px)');
 
   function isDesktop() {
     return desktopQuery.matches;
+  }
+
+  function isMobile() {
+    return mobileQuery.matches;
   }
 
   function isTypingField(target) {
@@ -47,6 +52,28 @@
   function setWindowHiddenState(windowElement, isHidden) {
     if (!windowElement) return;
     windowElement.setAttribute('aria-hidden', String(isHidden));
+  }
+
+  function getVisibleMobileWindow() {
+    return windows.find((windowElement) => (
+      windowElement.classList.contains('is-open') &&
+      !windowElement.classList.contains('is-minimized') &&
+      windowElement.dataset.windowId !== 'coffee'
+    ));
+  }
+
+  function updateMobileShellState() {
+    document.body.classList.toggle('mobile-window-open', Boolean(isMobile() && getVisibleMobileWindow()));
+  }
+
+  function closeOtherMobileWindows(activeId) {
+    if (!isMobile()) return;
+    windows.forEach((windowElement) => {
+      const id = windowElement.dataset.windowId;
+      if (id === activeId) return;
+      windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
+      setWindowHiddenState(windowElement, true);
+    });
   }
 
   function getShellBounds() {
@@ -128,7 +155,12 @@
     if (!taskbarApps) return;
     taskbarApps.innerHTML = '';
 
-    getOpenWindowsForTaskbar().forEach((windowElement) => {
+    const openWindows = getOpenWindowsForTaskbar();
+    const visibleWindows = isMobile()
+      ? openWindows.filter((windowElement) => !windowElement.classList.contains('is-minimized')).slice(-1)
+      : openWindows;
+
+    visibleWindows.forEach((windowElement) => {
       const id = windowElement.dataset.windowId;
       const button = document.createElement('button');
       button.type = 'button';
@@ -147,6 +179,8 @@
 
       taskbarApps.appendChild(button);
     });
+
+    updateMobileShellState();
   }
 
   function focusWindow(windowElement) {
@@ -163,6 +197,17 @@
     if (!windowElement) return;
     if (id === 'coffee' && !isDesktop()) return;
 
+    if (isMobile()) {
+      closeOtherMobileWindows(id);
+      windowElement.classList.remove('is-maximized');
+      windowElement.style.left = '';
+      windowElement.style.top = '';
+      windowElement.style.width = '';
+      windowElement.style.maxHeight = '';
+      const body = windowElement.querySelector('.window-body');
+      if (body) body.style.maxHeight = '';
+    }
+
     windowElement.classList.add('is-open');
     windowElement.classList.remove('is-minimized');
     setWindowHiddenState(windowElement, false);
@@ -173,6 +218,7 @@
 
   function restoreOrFocusWindow(windowElement) {
     if (!windowElement) return;
+    if (isMobile()) closeOtherMobileWindows(windowElement.dataset.windowId);
     windowElement.classList.add('is-open');
     windowElement.classList.remove('is-minimized');
     setWindowHiddenState(windowElement, false);
@@ -185,16 +231,24 @@
     windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
     setWindowHiddenState(windowElement, true);
 
-    const nextWindow = [...windows]
-      .filter((item) => item !== windowElement && item.classList.contains('is-open') && !item.classList.contains('is-minimized'))
-      .sort((a, b) => Number(b.style.zIndex || 0) - Number(a.style.zIndex || 0))[0];
+    if (!isMobile()) {
+      const nextWindow = [...windows]
+        .filter((item) => item !== windowElement && item.classList.contains('is-open') && !item.classList.contains('is-minimized'))
+        .sort((a, b) => Number(b.style.zIndex || 0) - Number(a.style.zIndex || 0))[0];
 
-    if (nextWindow) focusWindow(nextWindow);
+      if (nextWindow) focusWindow(nextWindow);
+    }
+
     syncTaskbar();
+    updateMobileShellState();
   }
 
   function minimizeWindow(windowElement) {
     if (!windowElement) return;
+    if (isMobile()) {
+      closeWindow(windowElement);
+      return;
+    }
     windowElement.classList.add('is-minimized');
     windowElement.classList.remove('is-active');
 
@@ -208,6 +262,7 @@
 
   function toggleMaximize(windowElement) {
     if (!windowElement) return;
+    if (isMobile()) return;
     focusWindow(windowElement);
     windowElement.classList.toggle('is-maximized');
     if (!windowElement.classList.contains('is-maximized')) fitWindow(windowElement);
@@ -378,9 +433,11 @@
 
   window.addEventListener('resize', () => {
     if (!isDesktop()) {
-      setStartMenuOpen(false);
       const coffeeWindow = getWindow('coffee');
       if (coffeeWindow?.classList.contains('is-open')) closeWindow(coffeeWindow);
+    }
+    if (isDesktop()) {
+      document.body.classList.remove('mobile-window-open');
     }
     fitOpenWindows();
     syncTaskbar();
@@ -393,7 +450,15 @@
     setWindowHiddenState(windowElement, !windowElement.classList.contains('is-open'));
   });
 
-  openWindow('welcome', true);
+  if (isDesktop()) {
+    openWindow('welcome', true);
+  } else {
+    windows.forEach((windowElement) => {
+      windowElement.classList.remove('is-open', 'is-active', 'is-minimized', 'is-maximized');
+      setWindowHiddenState(windowElement, true);
+    });
+  }
   fitOpenWindows();
   syncTaskbar();
+  updateMobileShellState();
 })();
