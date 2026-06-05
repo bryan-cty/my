@@ -59,12 +59,9 @@ function syncTaskbar() {
       button.classList.add('is-minimized');
     }
 
-    button.addEventListener('click', () => {
-      if (windowElement.classList.contains('is-minimized') || !windowElement.classList.contains('is-active')) {
-        focusWindow(windowElement);
-      } else {
-        minimizeWindow(windowElement);
-      }
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      focusWindow(windowElement);
     });
 
     taskbarApps.appendChild(button);
@@ -249,6 +246,10 @@ window.addEventListener('keydown', (event) => {
     secretBuffer = '';
   }
 });
+
+
+// Initial taskbar paint. Without this, welcome.txt is open but no running-app button is rendered yet.
+syncTaskbar();
 
 window.addEventListener('resize', () => {
   const coffeeWindow = getWindow('coffee');
